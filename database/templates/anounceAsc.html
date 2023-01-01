@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>学术报告讲座</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="/static/src/jquery.page.css">
+
+     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+        <script src="/js/bootstrap.js"></script>
+    <script src="/js/bootstrap-table.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-table-zh-CN.js"></script>
+
+
+</head>
+<body style="margin-left: 20px; margin-right: 20px; ">
+<h1 class="content">学术报告讲座</h1>
+
+<div>
+    <img
+            src="https://www.cs.tsinghua.edu.cn/images/list-banner.png"
+            height="120px"
+            width="1350"
+    alt="wrong"
+    />
+</div>
+<br/>
+<span class="kg">时间顺序</span
+>&emsp; &emsp;<label>
+    <select onchange="window.open(this.options[this.selectedIndex].value)">
+        <option value="/">全部</option>
+        <option value="/report">报告时间降序</option>
+        <option value="/reportAsc">报告时间升序</option>
+        <option value="/order&release">通知时间降序</option>
+        <option value="/releaseAsc">通知时间升序</option>
+    </select>
+</label>
+&emsp; &emsp;
+<span class="kg">学校院系</span
+>&emsp; &emsp;<label for=""></label><select onchange="window.open(this.options[this.selectedIndex].value)">
+    <option value="/" selected>全部</option>
+    <option value="/qh">清华大学</option>
+    <option value="/xin">信息安全国家重点实验室</option>
+    <option value="/sc">四川大学</option>
+    <option value="/bj">北京航空航天大学</option>
+    <option value="/sd">山东大学</option>
+    <option value="/zj">浙江大学</option>
+</select>
+&emsp; &emsp; &emsp; 时间&emsp; &emsp;
+    <select onchange="window.open(this.options[this.selectedIndex].value)">
+        <option value="/">全部</option>
+        <option value="/order-year">最近一年</option>
+        <option value="/order&year">最近两年</option>
+        <option value="/recent">最近一个月</option>
+    </select>
+<div style="margin-left: 20px; margin-right: 20px; ">
+<table
+        id='table_page'
+{#        data-toggle="table"#}
+        class="table-striped"
+>
+    {% for report in reports %}
+        <tr>
+
+            <th><a href="{{ report[1] }}" target="_blank">
+                {{ report[2] }} </a></th>
+
+            <th>{{ report[4] }}</th>
+            <th>{{ report[6] }}</th>
+            <th>{{ report[3] }}</th>
+            <th>{{ report[5] }}</th>
+            <th >{{ report[0] }}</th>
+        </tr>
+
+    {% endfor %}
+</table>
+</div>
+<br><br><br>
+
+
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<p>团队：郭羽龙、李太睿、周纪宇、梁正章</p>
+</div>
+</body>
+{#分页功能，搜索任意属性功能#}
+<script>
+    $('#table_page').bootstrapTable({
+        search:true,
+        pagination: true,   //是否显示分页条
+        paginationLoop: false,  //是否开启分页条无限循环，最后一页时点击下一页是否转到第一页
+        pageSize: 10,   //一页显示的行数
+        pageList: [10, 20, 25], //选择每页显示多少行，数据过少时可能会没有效果
+        smartDisplay:true,
+        pageNumber:1,
+        columns:[{
+            field:'title',
+            title:'讲座标题',
+            sortable:false
+        },{
+            field:'name',
+            title:'主讲人',
+            sortable:false
+        },{
+            field:'time',
+            title:'报告时间',
+            sortable:true
+        },{
+            field:'rel_time',
+            title:'通知时间',
+            sortable:true
+        },{
+            field:'address',
+            title:'报告地点',
+            sortable:false
+        },{
+            field:'school',
+            title:'学校',
+            sortable:false
+        },]
+    });
+</script>
+</html>
